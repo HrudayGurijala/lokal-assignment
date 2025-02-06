@@ -1,4 +1,5 @@
 import { StyleSheet, View,Text,FlatList,Image,ScrollView } from 'react-native';
+import { PropsWithChildren } from 'react';
 
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
@@ -6,8 +7,12 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Zocial from '@expo/vector-icons/Zocial';
 
+type cardProps = PropsWithChildren<{
+  details: cardDetails;
+}>;
+
 const imageURL = 'https://avatars.githubusercontent.com/u/e?email=myemail@mycompany.com&s=64';
-const Card = () => {
+const Card = ({details}: cardProps) => {
   return (
     <View style={styles.card}>
 
@@ -17,7 +22,7 @@ const Card = () => {
               </View>
               <View style={styles.jobHeader}>
                 <View style={styles.jobTitle}>
-                  <Text style={styles.jobTitleText}>software engineer</Text>
+                  <Text style={styles.jobTitleText}>{details.title}</Text>
                 </View>
                 <View style={styles.jobSalary}>
                   <Text style={styles.jobSalaryText}>$25000 - $100000</Text>
@@ -48,7 +53,7 @@ const Card = () => {
 
               <View style = {styles.whatsapp}>
                 <FontAwesome name="whatsapp" size={24} color="#25d366" />
-                <Text>whatsapp</Text>
+                <Text> Whatsapp</Text>
               </View>
 
               <View style = {styles.call}>
@@ -169,8 +174,6 @@ const styles = StyleSheet.create({
         borderRadius:7,
         flexDirection:'row',
         gap:5,
-        borderColor:'#727c85',
-        borderWidth:1,
         paddingVertical:7,
         paddingHorizontal:25,
         alignItems:'center',

@@ -7,7 +7,7 @@ export default function TabTwoScreen() {
     <SafeAreaView style={styles.container}>
 
       
-      <Text style={styles.title}>Bookmarks</Text>
+      <Text style={styles.title}>Lokal Jobs</Text>
 
       
 
