@@ -1,20 +1,32 @@
-import { View,StyleSheet, Image, Platform,Text } from 'react-native';
+import { View,StyleSheet, Image, Platform,Text,ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function TabTwoScreen() {
   return (
-    <SafeAreaView style={styles.titleContainer}>
-      <Text>bookmarks</Text>
+    <SafeAreaView style={styles.container}>
+
+      
+      <Text style={styles.title}>Bookmarks</Text>
+
+      
+
+
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
 
-  titleContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 10,
+    backgroundColor: '#fff',
   },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
 });
