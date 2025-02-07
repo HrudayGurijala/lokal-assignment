@@ -22,7 +22,7 @@ const Card = ({details}: cardProps) => {
               </View>
               <View style={styles.jobHeader}>
                 <View style={styles.jobTitle}>
-                  <Text style={styles.jobTitleText}>{details.title}</Text>
+                  <Text numberOfLines={2} style={styles.jobTitleText}>{details.title}</Text>
                 </View>
                 <View style={styles.jobSalary}>
                   <Text style={styles.jobSalaryText}>$25000 - $100000</Text>
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
       jobTitleText:{
         fontSize:20,
         fontWeight:'bold',  
+        // textOverflow:'ellipsis',
       },
       jobSalary:{
         flex:0,

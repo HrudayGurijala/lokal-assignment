@@ -9,4 +9,6 @@ interface cardDetails {
     whatsapp_no : string;
     custom_link : string;
 }
-//Show the title, location, salary and phone data in each card.
+
+//Todo
+// revamp this using according to the api response

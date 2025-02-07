@@ -1,24 +1,25 @@
-import { StyleSheet, View,Text,FlatList,Image,ScrollView } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Image, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Card from '@/components/Card';
 
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, router } from 'expo-router';
 
 
 //title, location, salary and phone data in each card.
 
 export default function HomeScreen() {
   const [jobBrief, setJobBrief] = useState<cardDetails[]>([]);
-  
+
 
   useEffect(() => {
-    const fetchJobBrief = async ()=>{
+    const fetchJobBrief = async () => {
       try {
         const response = await fetch(
           'https://testapi.getlokalapp.com/common/jobs?page=1'
         );
         const data = await response.json();
-        const cardDetails : cardDetails[] = data.results;
+        const cardDetails: cardDetails[] = data.results;
         setJobBrief(cardDetails);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -27,7 +28,7 @@ export default function HomeScreen() {
     fetchJobBrief();
 
   }, [])
-  
+
 
 
   // id : number;
@@ -47,12 +48,16 @@ export default function HomeScreen() {
 
         <FlatList
           data={jobBrief}
-          keyExtractor={(item) => item.id} 
+          keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => (
-            <Card
-              details = {item}
-            />
+            <Pressable onPress={() => router.push({
+              pathname: '/jobs/[id]',
+              params: { id: item.id, item: JSON.stringify(item) } ,
+            })}>
+              <Card details={item} />
+            </Pressable>
           )}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </SafeAreaView>

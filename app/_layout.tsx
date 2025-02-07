@@ -32,6 +32,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="jobs/[id]" options={{presentation:'modal', title:'Job Details'}} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
