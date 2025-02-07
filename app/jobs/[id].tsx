@@ -35,16 +35,14 @@ const JobsDescription = () => {
                 delete jobs[id];
                 setIsBookmarked(false);
                 Alert.alert('Success', 'Job removed from bookmarks');
+                await AsyncStorage.setItem('savedJobs', JSON.stringify(jobs));
             } else {
-                jobs[id] = {
-                    ...item,
-                    savedAt: new Date().toISOString()
-                };
+                jobs[id] = {...item};
                 setIsBookmarked(true);
                 Alert.alert('Success', 'Job bookmarked successfully');
+                await AsyncStorage.setItem('savedJobs', JSON.stringify(jobs));
             }
 
-            await AsyncStorage.setItem('savedJobs', JSON.stringify(jobs));
         } catch (error) {
             console.error('Error saving job:', error);
             Alert.alert('Error', 'Failed to save job');
@@ -58,9 +56,6 @@ const JobsDescription = () => {
                 <Pressable onPress={handleBookmark}>
                     <Text>{isBookmarked ? 'Remove Bookmark' : 'Save Job'}</Text>
                 </Pressable>
-                {/* <Pressable onPress={() => console.log('Close')}>
-                    <Text>Close</Text>
-                </Pressable> */}
             </GestureHandlerRootView>
         </>
     )
