@@ -5,6 +5,7 @@ import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Card from '@/components/Card';
 import { useFocusEffect } from '@react-navigation/native';
+import Seperator from '@/components/ui/Seperator';
 
 
 
@@ -35,44 +36,66 @@ const bookmarks = () => {
     );
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.safeArea}>
             <Text style={styles.header}>Lokal Jobs</Text>
             {savedJobs.length === 0 ? (
-                <Text style={styles.noJobsText}>No saved jobs yet</Text>
+                <View style={styles.centerStyle}>
+                    <Text style={styles.noJobsText}>No Bookmarks</Text>
+                </View>
             ) : (
-            <FlatList
-              data={savedJobs}
-              keyExtractor={(item) => String(item.id)}
-              renderItem={({ item }) => (
-                <Pressable onPress={() => router.push({
-                  pathname: '/jobs/[id]',
-                  params: { id: item.id, item: JSON.stringify(item) } ,
-                })}>
-                  <Card details={item} />
-                </Pressable>
-              )}
-              showsVerticalScrollIndicator={false}
-            />
+                <View style={styles.container}>
+                    <FlatList
+                        data={savedJobs}
+                        keyExtractor={(item) => String(item.id)}
+                        renderItem={({ item }) => (
+                            <Pressable onPress={() => router.push({
+                                pathname: '/jobs/[id]',
+                                params: { id: item.id, item: JSON.stringify(item) },
+                            })}>
+                                <Card details={item} />
+                                <Seperator/>
+                            </Pressable>
+                        )}
+                        showsVerticalScrollIndicator={false}
+                    />
+                </View>
             )}
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    safeArea: {
         flex: 1,
-        padding: 16,
+        backgroundColor: '#ffffff',
+        paddingHorizontal: 10,
     },
-    header: {
-        fontSize: 24,
+    centerStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        fontFamily: 'SpaceMono',
+        marginBottom: 30,
+
+      },
+      header: {
+        fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 16,
-    },
+      },
+      cardContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginBottom: 60,
+      },
     noJobsText: {
         textAlign: 'center',
         marginTop: 20,
-        fontSize: 16,
-        color: '#666',
+        fontSize: 20,
+        color: '#727c85',
     },
 });
 

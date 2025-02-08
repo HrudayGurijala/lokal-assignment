@@ -49,7 +49,10 @@ export default function HomeScreen() {
               <Card details={item} />
               <Seperator/>
             </Pressable> :
+            <>
             <LokalDisclamer details={item}/>
+            <Seperator/>
+            </>
           )}
           showsVerticalScrollIndicator={false}
         />
@@ -63,20 +66,17 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    padding: 10,
+    paddingHorizontal: 10,
     backgroundColor: '#ffffff',
+    fontFamily: 'SpaceMono',
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    height: 50,
   },
   cardContainer: {
     display: 'flex',
     flexDirection: 'column',
-    marginBottom: 100,
-    // padding: 10,
-    // borderBottomColor:'#727c85',
-    // borderBottomWidth:1,
+    marginBottom: 60,
   },
 });

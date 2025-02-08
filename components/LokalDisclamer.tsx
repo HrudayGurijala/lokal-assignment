@@ -7,7 +7,7 @@ type cardProps = PropsWithChildren<{
 }>;
 
 const LokalDisclamer = ({details}: cardProps) => {
-    console.log(details.creatives[0].image_url);
+    // console.log(details.creatives[0].image_url);
   return (
     <Image source={{uri : details.creatives[0].image_url}} style={styles.ImageDis} />
   )
@@ -18,5 +18,6 @@ export default LokalDisclamer
 const styles = StyleSheet.create({
     ImageDis:{
         height:100,
+        marginVertical:5,
     }
 })

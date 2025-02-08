@@ -31,19 +31,19 @@ const Card = ({details}: cardProps) => {
             </View>
 
             <View style={styles.companyName}>
-              <MaterialCommunityIcons name="office-building-outline" size={24} color="#727c85" />
+              <MaterialCommunityIcons name="office-building-outline" size={20} color="#727c85" />
               <Text style={styles.companyNameText}>{details.company_name}</Text>
             </View>
 
             <View style={styles.jobLocation}>
-              <Octicons name="location" size={24} color="#727c85" />
+              <Octicons name="location" size={20} color="#727c85" />
               <Text style={styles.jobLocationText}>{details.primary_details.Place}</Text>
             </View>
 
             <ScrollView horizontal={true} style={styles.jobTags}>
               {details.job_tags.map((tag, index) => (
                 <View style={styles.jobTagItem} key={index}>
-                  <Text>{tag.value}</Text>
+                  <Text style={styles.tagText}>{tag.value}</Text>
                 </View>
               ))}
             </ScrollView>
@@ -51,17 +51,17 @@ const Card = ({details}: cardProps) => {
             <View style={styles.jobContact}>
 
               <Pressable style = {styles.whatsapp} onPress={() => Linking.openURL(details.contact_preference.whatsapp_link)}>
-                <FontAwesome name="whatsapp" size={24} color="#25d366" />
-                <Text> Chat</Text>
+                <FontAwesome name="whatsapp" size={24} color="green" />
+                <Text style={styles.callText}> Chat</Text>
               </Pressable>
 
               <Pressable style = {styles.call} onPress={()=> Linking.openURL(details.custom_link)}>
                 {/* <Zocial name="call" size={24} color="#727c85" /> */}
-                <Text>{details.button_text}</Text>
+                <Text style={styles.callText}>{details.button_text}</Text>
               </Pressable>
 
               <View style = {styles.jobDetailsBtn}>
-                <AntDesign name="right" size={15} color="#727c85" />
+                <AntDesign name="right" size={15} color="#222222" />
               </View>
 
             </View>
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         // borderWidth:1,
         // borderColor:'#727c85',
+        paddingVertical:15,
       },
       cardHeader:{
         display:'flex',
@@ -86,36 +87,38 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         gap:0,
+        paddingHorizontal:5,
       },
       cardImage:{
         flex:1,
         width:40,
         height:40,
-        borderRadius:10,
+        borderRadius:7,
         display:'flex',
         alignItems:'center',
         justifyContent:'center',
-    
       },
       jobHeader:{
         flex:4,
         display:'flex',
         flexDirection:'column',
         gap:1,
+        marginBottom:5,
       },
       jobTitle:{
         flex:0,
       },
       jobTitleText:{
-        fontSize:17,
+        fontSize:15,
         fontWeight:'bold',  
+        color:"#111111",
         // textOverflow:'ellipsis',
       },
       jobSalary:{
         flex:0,
       },
       jobSalaryText:{
-        fontSize:15,
+        fontSize:13,
         color:"#727c85",
       },
       companyName:{
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
         gap:5,
       },
       companyNameText:{
-        fontSize:15,
+        fontSize:13,
         color:"#727c85",
       },
       jobLocation:{
@@ -137,22 +140,27 @@ const styles = StyleSheet.create({
         gap:5,
       },
       jobLocationText:{
-        fontSize:15,
+        fontSize:13,
         color:"#727c85",
       },
       jobTags:{
         flex:0,
-        padding:10,
+        padding:7,
       },
       jobTagItem:{
         padding:5,
         backgroundColor:'#f0f0f0',
-        borderRadius:5,
+        borderRadius:7,
         marginRight:5,
       },
+      tagText:{
+        fontSize:13,
+        color:"#111111",
+      },
       jobContact:{
-        flex:0,
-        padding:10,
+        // flex:,
+        paddingTop:7,
+        paddingHorizontal:10,
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-between',
@@ -161,10 +169,10 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         gap:5,
-        borderColor:'#727c85',
+        borderColor:'#111111',
         borderWidth:1,
         paddingVertical:7,
-        paddingHorizontal:20,
+        paddingHorizontal:30,
         alignItems:'center',
         justifyContent:'center',
         borderRadius:7,
@@ -175,11 +183,14 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         gap:5,
         paddingVertical:7,
-        paddingHorizontal:25,
+        paddingHorizontal:30,
         alignItems:'center',
         justifyContent:'center',
         backgroundColor:'#ffbb00',
-    
+      },
+      callText:{
+        fontSize:13,
+        fontWeight: 800,
       },
       jobDetailsBtn:{
         display:'flex',
@@ -188,7 +199,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         paddingHorizontal:10,
         borderRadius:7,
-        borderColor:'#727c85',
+        borderColor:'#111111',
         borderWidth:1,
       },
     

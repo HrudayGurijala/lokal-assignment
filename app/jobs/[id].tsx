@@ -13,7 +13,6 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Seperator from '@/components/ui/Seperator';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const JobsDescription = () => {
     const { id } = useLocalSearchParams<{ id: string }>();
@@ -47,7 +46,6 @@ const JobsDescription = () => {
         try {
             const savedJobs = await AsyncStorage.getItem('savedJobs');
             let jobs = savedJobs ? JSON.parse(savedJobs) : {};
-
             if (isBookmarked) {
                 delete jobs[id];
                 setIsBookmarked(false);
@@ -164,6 +162,21 @@ const JobsDescription = () => {
                         </View>
                     </View>
                     <Seperator/>
+                    <View style={styles.feeNotRequiredCard}>
+                        <Text>Fee not required</Text>
+                        <View >
+                            <View>
+                                <Text>Avoid paying fees</Text>
+                            </View>
+                            <View>
+                                <Text>Recruiter should not charge you any fee. Incase thet do, please complain to us</Text>
+                            </View>
+                            <View>
+                                <Text>Complain</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <Seperator/>
                     <View style={styles.disclaimerCard}>
                         <Text>Disclaimer</Text>
                         <Text>Lokal app is not responsible for the accuracy of the details of the claims made by the advertiser in this job post.</Text>
@@ -205,5 +218,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#ffffff',
     },
-
+    // Note: We are using react-native-snackbar for notifications since React Native's Alert
+    // uses native dialogs which are not styleable. Snackbar will appear at the bottom for 1 second.
+    // Example usage in a function:
+    // import Snackbar from 'react-native-snackbar';
+    //
+    // Snackbar.show({
+    //   text: 'Job bookmarked successfully',
+    //   duration: 1000,
+    //   backgroundColor: 'green',
+    // });
 });
