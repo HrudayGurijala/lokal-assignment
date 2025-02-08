@@ -4,6 +4,7 @@ import Card from '@/components/Card';
 
 import { useState, useEffect } from 'react';
 import { Link, router } from 'expo-router';
+import Seperator from '@/components/ui/Seperator';
 
 
 //title, location, salary and phone data in each card.
@@ -45,7 +46,8 @@ export default function HomeScreen() {
               params: { id: item.id, item: JSON.stringify(item) } ,
             })}>
               <Card details={item} />
-            </Pressable>:
+              <Seperator/>
+            </Pressable> :
             <View><Text>1040 card</Text></View>
           )}
           showsVerticalScrollIndicator={false}

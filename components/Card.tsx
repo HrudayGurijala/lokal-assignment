@@ -1,17 +1,17 @@
-import { StyleSheet, View,Text,FlatList,Image,ScrollView } from 'react-native';
+import { StyleSheet, View,Text,FlatList,Image,ScrollView, Pressable, Linking } from 'react-native';
 import { PropsWithChildren } from 'react';
 
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import Zocial from '@expo/vector-icons/Zocial';
+// import Zocial from '@expo/vector-icons/Zocial';
 
 type cardProps = PropsWithChildren<{
   details: cardDetails;
 }>;
 
-const imageURL = 'https://avatars.githubusercontent.com/u/e?email=myemail@mycompany.com&s=64';
+// const imageURL = 'https://avatars.githubusercontent.com/u/e?email=myemail@mycompany.com&s=64';
 const Card = ({details}: cardProps) => {
   return (
     <View style={styles.card}>
@@ -50,15 +50,15 @@ const Card = ({details}: cardProps) => {
             
             <View style={styles.jobContact}>
 
-              <View style = {styles.whatsapp}>
+              <Pressable style = {styles.whatsapp} onPress={() => Linking.openURL(details.contact_preference.whatsapp_link)}>
                 <FontAwesome name="whatsapp" size={24} color="#25d366" />
                 <Text> Chat</Text>
-              </View>
+              </Pressable>
 
-              <View style = {styles.call}>
+              <Pressable style = {styles.call} onPress={()=> Linking.openURL(details.custom_link)}>
                 {/* <Zocial name="call" size={24} color="#727c85" /> */}
                 <Text>{details.button_text}</Text>
-              </View>
+              </Pressable>
 
               <View style = {styles.jobDetailsBtn}>
                 <AntDesign name="right" size={15} color="#727c85" />
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         flex:0,
       },
       jobTitleText:{
-        fontSize:20,
+        fontSize:17,
         fontWeight:'bold',  
         // textOverflow:'ellipsis',
       },
