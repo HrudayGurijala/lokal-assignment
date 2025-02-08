@@ -10,28 +10,29 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const bookmarks = () => {
     const [savedJobs, setSavedJobs] = useState<cardDetails[]>([]);
-
-    useEffect(() => {
-        loadSavedJobs();
-    }, []);
-    useFocusEffect(
-      React.useCallback(() => {
-        loadSavedJobs();
-      }, [])
-    );
+    
     const loadSavedJobs = async () => {
         try {
             const savedJobsData = await AsyncStorage.getItem('savedJobs');
             if (savedJobsData) {
                 const jobs = JSON.parse(savedJobsData);
-                setSavedJobs(Object.values(jobs));
-
+                if (jobs && typeof jobs === 'object') {
+                    setSavedJobs(Array.isArray(jobs) ? jobs : Object.values(jobs));
+                } else {
+                    setSavedJobs([]);
+                }
             }
         } catch (error) {
             console.error('Error loading saved jobs:', error);
             Alert.alert('Error', 'Failed to load saved jobs');
         }
     };
+
+    useFocusEffect(
+      React.useCallback(() => {
+        loadSavedJobs();
+      }, [])
+    );
 
     return (
         <SafeAreaView style={styles.container}>

@@ -29,17 +29,6 @@ export default function HomeScreen() {
 
   }, [])
 
-
-
-  // id : number;
-  // type : number;
-  // jobTitle : string;
-  // salary : string;
-  // company_name : string;
-  // location : string;
-  // tags : string;
-  // whatsapp_no : string;
-  // custom_link : string;
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Lokal Jobs</Text>
@@ -50,12 +39,14 @@ export default function HomeScreen() {
           data={jobBrief}
           keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => (
+            (item.type !== 1040)?
             <Pressable onPress={() => router.push({
               pathname: '/jobs/[id]',
               params: { id: item.id, item: JSON.stringify(item) } ,
             })}>
               <Card details={item} />
-            </Pressable>
+            </Pressable>:
+            <View><Text>1040 card</Text></View>
           )}
           showsVerticalScrollIndicator={false}
         />

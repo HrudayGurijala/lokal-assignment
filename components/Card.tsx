@@ -18,47 +18,46 @@ const Card = ({details}: cardProps) => {
 
             <View style={styles.cardHeader}>
               <View style={styles.cardImage}>
-                <Image style={styles.cardImage} source={{uri : imageURL}}/>
+                <Image style={styles.cardImage} source={{uri : details.creatives[0].file}}/>
               </View>
               <View style={styles.jobHeader}>
                 <View style={styles.jobTitle}>
                   <Text numberOfLines={2} style={styles.jobTitleText}>{details.title}</Text>
                 </View>
                 <View style={styles.jobSalary}>
-                  <Text style={styles.jobSalaryText}>$25000 - $100000</Text>
+                  <Text style={styles.jobSalaryText}>{details.primary_details.Salary}</Text>
                 </View>
               </View>
             </View>
 
             <View style={styles.companyName}>
               <MaterialCommunityIcons name="office-building-outline" size={24} color="#727c85" />
-              <Text style={styles.companyNameText}>SS Infra</Text>
+              <Text style={styles.companyNameText}>{details.company_name}</Text>
             </View>
 
             <View style={styles.jobLocation}>
               <Octicons name="location" size={24} color="#727c85" />
-              <Text style={styles.jobLocationText}>Hyderabad</Text>
+              <Text style={styles.jobLocationText}>{details.primary_details.Place}</Text>
             </View>
 
             <ScrollView horizontal={true} style={styles.jobTags}>
-              <View style={styles.jobTagItem}>
-                <Text>Full Time</Text>
-              </View>
-              <View style={styles.jobTagItem}>
-                <Text>vacancies</Text>
-              </View>
+              {details.job_tags.map((tag, index) => (
+                <View style={styles.jobTagItem} key={index}>
+                  <Text>{tag.value}</Text>
+                </View>
+              ))}
             </ScrollView>
             
             <View style={styles.jobContact}>
 
               <View style = {styles.whatsapp}>
                 <FontAwesome name="whatsapp" size={24} color="#25d366" />
-                <Text> Whatsapp</Text>
+                <Text> Chat</Text>
               </View>
 
               <View style = {styles.call}>
-                <Zocial name="call" size={24} color="#727c85" />
-                <Text>Call HR</Text>
+                {/* <Zocial name="call" size={24} color="#727c85" /> */}
+                <Text>{details.button_text}</Text>
               </View>
 
               <View style = {styles.jobDetailsBtn}>

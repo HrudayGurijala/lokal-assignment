@@ -1,18 +1,23 @@
-import { StyleSheet, Text, View, Alert } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { useLocalSearchParams, Stack } from 'expo-router'
+import { StyleSheet, Text, View, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { useLocalSearchParams, Stack } from 'expo-router';
 import { Pressable } from 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const JobsDescription = () => {
     const { id } = useLocalSearchParams<{ id: string }>();
-    const item = useLocalSearchParams<{ item: string }>();
+    const { item: itemStr } = useLocalSearchParams<{ item: string }>();
+    const item = itemStr ? JSON.parse(itemStr) : null;
     const [isBookmarked, setIsBookmarked] = useState(false);
 
     useEffect(() => {
-        checkBookmarkStatus();
-    }, []);
+        if (item) {
+            checkBookmarkStatus();
+        } else {
+            console.error('Item is undefined or invalid');
+        }
+    }, [item]);
 
     const checkBookmarkStatus = async () => {
         try {
@@ -35,9 +40,10 @@ const JobsDescription = () => {
                 delete jobs[id];
                 setIsBookmarked(false);
                 Alert.alert('Success', 'Job removed from bookmarks');
+                // await AsyncStorage.clear();
                 await AsyncStorage.setItem('savedJobs', JSON.stringify(jobs));
             } else {
-                jobs[id] = {...item};
+                jobs[id] = { ...item };
                 setIsBookmarked(true);
                 Alert.alert('Success', 'Job bookmarked successfully');
                 await AsyncStorage.setItem('savedJobs', JSON.stringify(jobs));
@@ -49,18 +55,35 @@ const JobsDescription = () => {
         }
     };
 
+    if (!item) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.errorText}>Invalid job data</Text>
+            </View>
+        );
+    }
+
     return (
-        <>
-            <GestureHandlerRootView>
-                <Text>{id}</Text>
-                <Pressable onPress={handleBookmark}>
-                    <Text>{isBookmarked ? 'Remove Bookmark' : 'Save Job'}</Text>
-                </Pressable>
-            </GestureHandlerRootView>
-        </>
-    )
-}
+        <GestureHandlerRootView style={styles.container}>
+            <Text>{id}</Text>
+            <Pressable onPress={handleBookmark}>
+                <Text>{isBookmarked ? 'Remove Bookmark' : 'Save Job'}</Text>
+            </Pressable>
+        </GestureHandlerRootView>
+    );
+};
 
-export default JobsDescription
+export default JobsDescription;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 16,
+    },
+    errorText: {
+        fontSize: 18,
+        color: 'red',
+    },
+});
