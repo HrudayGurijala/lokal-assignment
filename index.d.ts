@@ -70,6 +70,7 @@ interface cardDetails {
         file: string;
         thumb_url: string;
         creative_type: number;
+        image_url:string;
     }>;
     videos: any[];
     locations: Array<{

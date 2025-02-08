@@ -5,6 +5,7 @@ import Card from '@/components/Card';
 import { useState, useEffect } from 'react';
 import { Link, router } from 'expo-router';
 import Seperator from '@/components/ui/Seperator';
+import LokalDisclamer from '@/components/LokalDisclamer';
 
 
 //title, location, salary and phone data in each card.
@@ -48,7 +49,7 @@ export default function HomeScreen() {
               <Card details={item} />
               <Seperator/>
             </Pressable> :
-            <View><Text>1040 card</Text></View>
+            <LokalDisclamer details={item}/>
           )}
           showsVerticalScrollIndicator={false}
         />
