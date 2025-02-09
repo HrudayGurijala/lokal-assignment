@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hrudaygurijala.lokalassignment"
     },
     "web": {
       "bundler": "metro",
@@ -47,6 +48,14 @@
       {
         "asset": "./assets/fonts/Exo2-Bold.ttf"
       }
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "88be64b8-7624-473e-b7ce-0cd385a219b6"
+      }
+    }
   }
 }
