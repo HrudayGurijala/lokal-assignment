@@ -52,7 +52,7 @@ const Card = ({details}: cardProps) => {
 
               <Pressable style = {styles.whatsapp} onPress={() => Linking.openURL(details.contact_preference.whatsapp_link)}>
                 <FontAwesome name="whatsapp" size={24} color="green" />
-                <Text style={styles.callText}> Chat</Text>
+                <Text style={styles.callText}> Chat </Text>
               </Pressable>
 
               <Pressable style = {styles.call} onPress={()=> Linking.openURL(details.custom_link)}>
@@ -110,9 +110,10 @@ const styles = StyleSheet.create({
       },
       jobTitleText:{
         fontSize:15,
-        fontWeight:'bold',  
+        // fontWeight:'bold',  
         color:"#111111",
         // textOverflow:'ellipsis',
+        fontFamily: 'Exo2Bold',
       },
       jobSalary:{
         flex:0,
@@ -120,6 +121,8 @@ const styles = StyleSheet.create({
       jobSalaryText:{
         fontSize:13,
         color:"#727c85",
+        fontFamily: 'Exo2Medium',
+
       },
       companyName:{
         flex:0,
@@ -131,6 +134,7 @@ const styles = StyleSheet.create({
       companyNameText:{
         fontSize:13,
         color:"#727c85",
+        fontFamily: 'Exo2Medium',
       },
       jobLocation:{
         flex:0,
@@ -142,6 +146,7 @@ const styles = StyleSheet.create({
       jobLocationText:{
         fontSize:13,
         color:"#727c85",
+        fontFamily: 'Exo2Medium',
       },
       jobTags:{
         flex:0,
@@ -156,10 +161,12 @@ const styles = StyleSheet.create({
       tagText:{
         fontSize:13,
         color:"#111111",
+        fontFamily: 'Exo2Medium',
       },
       jobContact:{
         // flex:,
-        paddingTop:7,
+        paddingTop:3,
+        paddingBottom:0,
         paddingHorizontal:10,
         display:'flex',
         flexDirection:'row',
@@ -168,10 +175,10 @@ const styles = StyleSheet.create({
       whatsapp:{
         display:'flex',
         flexDirection:'row',
-        gap:5,
+        // gap:5,
         borderColor:'#111111',
         borderWidth:1,
-        paddingVertical:7,
+        paddingVertical:10,
         paddingHorizontal:30,
         alignItems:'center',
         justifyContent:'center',
@@ -181,8 +188,8 @@ const styles = StyleSheet.create({
         display:'flex',
         borderRadius:7,
         flexDirection:'row',
-        gap:5,
-        paddingVertical:7,
+        // gap:5,
+        paddingVertical:10,
         paddingHorizontal:30,
         alignItems:'center',
         justifyContent:'center',
@@ -190,7 +197,8 @@ const styles = StyleSheet.create({
       },
       callText:{
         fontSize:13,
-        fontWeight: 800,
+        // fontWeight: 800,
+        fontFamily: 'Exo2Bold',
       },
       jobDetailsBtn:{
         display:'flex',

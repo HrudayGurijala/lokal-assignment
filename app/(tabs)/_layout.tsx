@@ -32,6 +32,9 @@ export default function TabLayout() {
           title: 'Jobs',
           tabBarIcon: ({ color }) => <Octicons size={28} name="search" color={color} />,
           headerShown: false,
+          tabBarLabelStyle: {
+            fontFamily: 'Exo2Medium',
+          },
         }}
         
         />
@@ -41,7 +44,9 @@ export default function TabLayout() {
           headerShown: false,
           title: 'Bookmarks',
           tabBarIcon: ({ color }) => <FontAwesome6 size={26} name="bookmark" color={color} />,
-
+          tabBarLabelStyle: {
+            fontFamily: 'Exo2Medium',
+          },
         }}
       />
     </Tabs>

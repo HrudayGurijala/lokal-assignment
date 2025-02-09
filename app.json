@@ -36,6 +36,17 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "fonts": [
+      {
+        "asset": "./assets/fonts/Exo2-Regular.ttf"
+      },
+      {
+        "asset": "./assets/fonts/Exo2-Medium.ttf"
+      },
+      {
+        "asset": "./assets/fonts/Exo2-Bold.ttf"
+      }
+    ]
   }
 }

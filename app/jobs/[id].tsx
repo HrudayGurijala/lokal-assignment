@@ -218,14 +218,4 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#ffffff',
     },
-    // Note: We are using react-native-snackbar for notifications since React Native's Alert
-    // uses native dialogs which are not styleable. Snackbar will appear at the bottom for 1 second.
-    // Example usage in a function:
-    // import Snackbar from 'react-native-snackbar';
-    //
-    // Snackbar.show({
-    //   text: 'Job bookmarked successfully',
-    //   duration: 1000,
-    //   backgroundColor: 'green',
-    // });
 });
