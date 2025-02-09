@@ -25,7 +25,7 @@ export default function HomeScreen() {
         const cardDetails: cardDetails[] = data.results;
         setJobBrief(cardDetails);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.log(error);
       } finally{
         setLoading(false);
       }
@@ -53,9 +53,12 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Lokal Jobs</Text>
-
-      <View style={styles.cardContainer}>
-
+      {(jobBrief.length === 0) ? (
+        <View style={{display:'flex',justifyContent:'center',alignItems:'center',height:"100%",}}>
+          <Text style={styles.noJobsText}>No jobs posted</Text>
+        </View>
+      ):
+      (<View style={styles.cardContainer}>
         <FlatList
           data={jobBrief}
           keyExtractor={(item) => String(item.id)}
@@ -75,7 +78,7 @@ export default function HomeScreen() {
           )}
           showsVerticalScrollIndicator={false}
         />
-      </View>
+      </View>)}
     </SafeAreaView>
   );
 }
@@ -98,4 +101,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginBottom: 60,
   },
+noJobsText: {
+  textAlign: 'center',
+  marginTop: 20,
+  fontSize: 20,
+  color: '#727c85',
+  fontFamily:'Exo2Medium'
+},
 });
