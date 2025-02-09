@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingHorizontal: 10,
     backgroundColor: '#ffffff',
-    fontFamily: 'SpaceMono',
   },
   title: {
     fontSize: 20,
