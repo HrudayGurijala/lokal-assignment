@@ -6,13 +6,14 @@ import { useState, useEffect } from 'react';
 import { Link, router } from 'expo-router';
 import Seperator from '@/components/ui/Seperator';
 import LokalDisclamer from '@/components/LokalDisclamer';
+import SkeletonLoader from '@/components/SkeletonLoader';
 
 
 //title, location, salary and phone data in each card.
 
 export default function HomeScreen() {
   const [jobBrief, setJobBrief] = useState<cardDetails[]>([]);
-
+  const [loading,setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchJobBrief = async () => {
@@ -25,11 +26,29 @@ export default function HomeScreen() {
         setJobBrief(cardDetails);
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally{
+        setLoading(false);
       }
     }
     fetchJobBrief();
 
   }, [])
+
+  if(loading){
+    return(
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>Lokal Jobs</Text>
+        <SkeletonLoader/>
+        <Seperator/>
+        <SkeletonLoader/>
+        <Seperator/>
+        <SkeletonLoader/>
+        <Seperator/>
+        <SkeletonLoader/>
+        <Seperator/>
+        </SafeAreaView>
+    )
+  }
 
   return (
     <SafeAreaView style={styles.container}>
