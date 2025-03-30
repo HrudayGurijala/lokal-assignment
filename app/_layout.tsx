@@ -4,7 +4,6 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import { Text, TextInput } from 'react-native';
 import 'react-native-reanimated';
 
 // Set default text props for global font
@@ -45,6 +44,7 @@ export default function RootLayout() {
             presentation: 'modal', 
             title: 'Job Details',
             headerTitleStyle: { fontFamily: 'Exo2Bold' },
+            // headerTitle:"",
           }} 
         />
       </Stack>

@@ -14,15 +14,11 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Seperator from '@/components/ui/Seperator';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-
-
 const JobsDescription = () => {
     const { id } = useLocalSearchParams<{ id: string }>();
     const { item: itemStr } = useLocalSearchParams<{ item: string }>();
     const item: cardDetails = itemStr ? JSON.parse(itemStr) : null;
     const [isBookmarked, setIsBookmarked] = useState(false);
-
-
 
     useEffect(() => {
         if (item) {
@@ -52,7 +48,6 @@ const JobsDescription = () => {
                 delete jobs[id];
                 setIsBookmarked(false);
                 Alert.alert('Success', 'Job removed from bookmarks');
-                // await AsyncStorage.clear();
                 await AsyncStorage.setItem('savedJobs', JSON.stringify(jobs));
             } else {
                 jobs[id] = { ...item };
@@ -60,7 +55,6 @@ const JobsDescription = () => {
                 Alert.alert('Success', 'Job bookmarked successfully');
                 await AsyncStorage.setItem('savedJobs', JSON.stringify(jobs));
             }
-
         } catch (error) {
             console.error('Error saving job:', error);
             Alert.alert('Error', 'Failed to save job');
@@ -75,105 +69,137 @@ const JobsDescription = () => {
         );
     }
     const parsedContent = typeof item.content === 'string' ? JSON.parse(item.content) : item.content;
-    const createdOn =  new Date(item.created_on);
+    const createdOn = new Date(item.created_on);
 
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDate = createdOn.toLocaleDateString('en-GB', options);
 
-    // console.log(item.created_on);
+    // Render Text component only if data exists
+    const renderTextIfExists = (text, style) => {
+        return text ? <Text style={style}>{text}</Text> : null;
+    };
+
     return (
-
         <GestureHandlerRootView style={styles.container}>
-            {/* <Text>{id}</Text> */}
             <ScrollView showsVerticalScrollIndicator={false}>
-
                 <View style={styles.detailsCard}>
                     <View style={styles.detailsHeader}>
-                        <View style={styles.cardImage}>
-                            <Image style={styles.cardImage} source={{ uri: item.creatives[0].file }} />
-                        </View>
+                        {item.creatives && item.creatives[0] && item.creatives[0].file && (
+                            <View style={styles.cardImage}>
+                                <Image style={styles.cardImage} source={{ uri: item.creatives[0].file }} />
+                            </View>
+                        )}
                         <View style={styles.jobTitle}>
-                            <Text numberOfLines={2} style={styles.jobTitleText}>{item.title}</Text>
+                            {item.title && (
+                                <Text numberOfLines={2} style={styles.jobTitleText}>{item.title}</Text>
+                            )}
                         </View>
                         <Pressable onPress={handleBookmark}>
-                            {isBookmarked ? (
+                            {(isBookmarked) ? (
                                 <MaterialCommunityIcons name="bookmark" size={30} color="#6494f1" />
                             ) : (
                                 <MaterialCommunityIcons name="bookmark-outline" size={30} color="#6494f1" />
                             )}
                         </Pressable>
                     </View>
-                    <View style={styles.jobSalary}>
-                        <FontAwesome6 name="money-bills" size={17} color="#727c85" />
-                        <Text style={styles.jobSalaryText}> {item.primary_details.Salary}</Text>
-                    </View>
-                    <View style={styles.companyName}>
-                        <MaterialCommunityIcons name="office-building-outline" size={20} color="#727c85" />
-                        <Text style={styles.companyNameText}>{item.company_name}</Text>
-                    </View>
+                    
+                    {item.primary_details && item.primary_details.Salary && (
+                        <View style={styles.jobSalary}>
+                            <FontAwesome6 name="money-bills" size={17} color="#727c85" />
+                            <Text style={styles.jobSalaryText}> {item.primary_details.Salary}</Text>
+                        </View>
+                    )}
+                    
+                    {item.company_name && (
+                        <View style={styles.companyName}>
+                            <MaterialCommunityIcons name="office-building-outline" size={20} color="#727c85" />
+                            <Text style={styles.companyNameText}>{item.company_name}</Text>
+                        </View>
+                    )}
 
-                    <View style={styles.jobLocation}>
-                        <Octicons name="location" size={20} color="#727c85" />
-                        <Text style={styles.jobLocationText}> {item.primary_details.Place}</Text>
-                    </View>
+                    {item.primary_details && item.primary_details.Place && (
+                        <View style={styles.jobLocation}>
+                            <Octicons name="location" size={20} color="#727c85" />
+                            <Text style={styles.jobLocationText}> {item.primary_details.Place}</Text>
+                        </View>
+                    )}
 
-                    <ScrollView horizontal={true} style={styles.jobTags}>
-                        {item.job_tags.map((tag, index) => (
-                            <View style={styles.jobTagItem} key={index}>
-                                <Text style={styles.tagText}>{tag.value}</Text>
-                            </View>
-                        ))}
-                    </ScrollView>
-
+                    {item.job_tags && item.job_tags.length > 0 && (
+                        <ScrollView horizontal={true} style={styles.jobTags}>
+                            {item.job_tags.map((tag, index) => (
+                                tag.value ? (
+                                    <View style={styles.jobTagItem} key={index}>
+                                        <Text style={styles.tagText}>{tag.value}</Text>
+                                    </View>
+                                ) : null
+                            ))}
+                        </ScrollView>
+                    )}
                 </View>
+                
                 <Seperator />
+                
                 <View style={styles.jobHighlightsCard}>
-                    <View >
+                    <View>
                         <Text style={styles.highlightHeaderText}>Job Highlights</Text>
                     </View>
                     <View style={styles.highlights}>
-                        <View style={styles.highlightItem}>
-                            <AntDesign name="staro" size={20} color="#3f3f3f" />
-                            <View >
-                                <Text style={styles.highlightText}>Experience : </Text>
+                        {item.primary_details && item.primary_details.Experience && (
+                            <View style={styles.highlightItem}>
+                                <AntDesign name="staro" size={20} color="#3f3f3f" />
+                                <View>
+                                    <Text style={styles.highlightText}>Experience : </Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.highlightText}>{item.primary_details.Experience}</Text>
+                                </View>
                             </View>
-                            <View>
-                                <Text style={styles.highlightText}>{item.primary_details.Experience}</Text>
+                        )}
+                        
+                        {item.primary_details && item.primary_details.Qualification && (
+                            <View style={styles.highlightItem}>
+                                <MaterialIcons name="menu-book" size={20} color="#3f3f3f" />
+                                <View>
+                                    <Text style={styles.highlightText}>Qualifications : </Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.highlightText}>{item.primary_details.Qualification}</Text>
+                                </View>
                             </View>
-                        </View>
-                        <View style={styles.highlightItem}>
-                            <MaterialIcons name="menu-book" size={20} color="#3f3f3f" />
-                            <View>
-                                <Text style={styles.highlightText}>Qualifications : </Text>
+                        )}
+                        
+                        {item.openings_count && (
+                            <View style={styles.highlightItem}>
+                                <Ionicons name="people-outline" size={20} color="#3f3f3f" />
+                                <View>
+                                    <Text style={styles.highlightText}>Number of openings : </Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.highlightText}>{item.openings_count}</Text>
+                                </View>
                             </View>
-                            <View>
-                                <Text style={styles.highlightText}>{item.primary_details.Qualification}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.highlightItem}>
-                            <Ionicons name="people-outline" size={20} color="#3f3f3f" />
-                            <View>
-                                <Text style={styles.highlightText}>Number of openings : </Text>
-                            </View>
-                            <View>
-                                <Text style={styles.highlightText}>{item.openings_count}</Text>
-                            </View>
-                        </View>
+                        )}
                     </View>
                 </View>
-                <View style={styles.aboutCard}>
-                    <Text style={styles.aboutHeader}>Job Description</Text>
-                    {/* <Text style={styles.about}>{parsedContent}</Text> */}
-                    <View style={styles.contentContainer}>
-                        {Object.entries(parsedContent).map(([key, value]) => (
-                            <View key={key} style={styles.section}>
-                                <Text style={styles.contentText}>{String(value)}</Text>
-                            </View>
-                        ))}
+                
+                {parsedContent && Object.keys(parsedContent).length > 0 && (
+                    <View style={styles.aboutCard}>
+                        <Text style={styles.aboutHeader}>Job Description</Text>
+                        <View style={styles.contentContainer}>
+                            {Object.entries(parsedContent).map(([key, value]) => (
+                                value ? (
+                                    <View key={key} style={styles.section}>
+                                        <Text style={styles.contentText}>{String(value)}</Text>
+                                    </View>
+                                ) : null
+                            ))}
+                        </View>
                     </View>
-                </View>
+                )}
+                
                 <Seperator />
-                {item.primary_details.Fees_Charged === "-1" ? (
+                
+                {item.primary_details && item.primary_details.Fees_Charged === "-1" && (
                     <>
                         <View style={styles.warningCard}>
                             <Text style={styles.warningTitle}>! Fee not required</Text>
@@ -189,8 +215,6 @@ const JobsDescription = () => {
                         </View>
                         <Seperator/>
                     </>
-                ) : (
-                    <></>
                 )}
 
                 <View style={styles.disclaimerCard}>
@@ -199,30 +223,35 @@ const JobsDescription = () => {
                         Lokal App is not responsible for the accuracy of the job details or the claims made by the advertiser in this job post.
                     </Text>
                     <View style={styles.statsRow}>
-                        
-                        <Text style={styles.statsText}>Posted on {formattedDate}</Text>
-                        <Text style={styles.statsText}>{item.views} views</Text>
+                        {formattedDate && (
+                            <Text style={styles.statsText}>Posted on {formattedDate}</Text>
+                        )}
+                        {item.views && (
+                            <Text style={styles.statsText}>{item.views} views</Text>
+                        )}
                     </View>
                 </View>
+                
                 <Seperator />
+                
                 <View style={styles.jobContact}>
+                    {item.contact_preference && item.contact_preference.whatsapp_link && (
+                        <Pressable style={styles.whatsapp} onPress={() => Linking.openURL(item.contact_preference.whatsapp_link)}>
+                            <FontAwesome name="whatsapp" size={24} color="green" />
+                            <Text style={styles.callText}> Chat </Text>
+                        </Pressable>
+                    )}
 
-
-                <Pressable style = {styles.whatsapp} onPress={() => Linking.openURL(item.contact_preference.whatsapp_link)}>
-                <FontAwesome name="whatsapp" size={24} color="green" />
-                <Text style={styles.callText}> Chat </Text>
-              </Pressable>
-
-              <Pressable style = {styles.call} onPress={()=> Linking.openURL(item.custom_link)}>
-                {/* <Zocial name="call" size={24} color="#727c85" /> */}
-                <Text style={styles.callText}>{item.button_text}</Text>
-              </Pressable>
-
+                    {item.custom_link && (
+                        <Pressable style={styles.call} onPress={() => Linking.openURL(item.custom_link)}>
+                            {item.button_text && (
+                                <Text style={styles.callText}>{item.button_text}</Text>
+                            )}
+                        </Pressable>
+                    )}
                 </View>
-                {/* <Seperator/> */}
-            </ScrollView >
+            </ScrollView>
         </GestureHandlerRootView>
-
     );
 };
 
@@ -328,7 +357,6 @@ const styles = StyleSheet.create({
     highlightHeaderText: {
         fontSize: 14,
         fontFamily: 'Exo2Bold',
-
     },
     highlights: {
         display: 'flex',
@@ -366,7 +394,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Exo2Regular',
         color: "#727c85"
     },
-
     jobContact: {
         padding: 10,
         display: 'flex',
@@ -375,7 +402,7 @@ const styles = StyleSheet.create({
         gap: 10, 
     },
     whatsapp: {
-        flex: 1, // Add flex: 1 to make it take equal space
+        flex: 1,
         display: 'flex',
         flexDirection: 'row',
         borderColor: '#111111',
@@ -387,7 +414,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
     },
     call: {
-        flex: 1, // Add flex: 1 to make it take equal space
+        flex: 1,
         display: 'flex',
         borderRadius: 7,
         flexDirection: 'row',
@@ -466,13 +493,11 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#0F172A',
         fontFamily: 'Exo2Bold'
-
     },
     disclaimerText: {
         fontSize: 14,
         color: '#64748B',
         fontFamily: 'Exo2Medium'
-
     },
     statsRow: {
         flexDirection: 'row',
@@ -483,8 +508,5 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: '#64748B',
         fontFamily: 'Exo2Medium'
-
     },
-
-
 });
