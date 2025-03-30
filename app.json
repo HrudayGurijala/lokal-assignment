@@ -11,17 +11,18 @@
     "ios": {
       "supportsTablet": true
     },
+    "owner": "sagarhh",
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.hrudaygurijala.lokalassignment"
+      "package": "com.sagarhh.lokalassignment"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/icon.png"
     },
     "plugins": [
       "expo-router",
@@ -38,23 +39,12 @@
     "experiments": {
       "typedRoutes": true
     },
-    "fonts": [
-      {
-        "asset": "./assets/fonts/Exo2-Regular.ttf"
-      },
-      {
-        "asset": "./assets/fonts/Exo2-Medium.ttf"
-      },
-      {
-        "asset": "./assets/fonts/Exo2-Bold.ttf"
-      }
-    ],
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "88be64b8-7624-473e-b7ce-0cd385a219b6"
+        "projectId": "3e261346-f09a-4d09-ba6d-1c33c21508ba"
       }
     }
   }
