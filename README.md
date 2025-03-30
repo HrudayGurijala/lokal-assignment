@@ -1,50 +1,48 @@
-# Welcome to your Expo app 👋
+# 📢 Lokal Assignment - React Native (Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 📝 Description
 
-## Get started
+This is a React Native application built using Expo for the Lokal Jobs assignment. The app provides a seamless experience for users to browse job listings, bookmark jobs for offline viewing, and contact employers via messaging or calls. The UI closely replicates the Lokal Jobs app while incorporating additional features such as search functionality and lazy loading for improved performance.
 
-1. Install dependencies
+## 🛠️ Technology Used
 
+- 🚀 **React Native (Expo)** - Cross-platform mobile app development
+- 🔄 **React Navigation** - For seamless navigation between screens
+- 💾 **AsyncStorage** - For locally storing bookmarked jobs
+- ⚡ **Axios** - For efficient API calls and data fetching
+- 📜 **FlatList** - For optimized rendering with infinite scrolling
+- 🎨 **React Native Paper** - For polished UI components
+
+## ✨ Features
+
+- 📌 **Bottom Navigation**: Two sections - Jobs and Bookmarks
+- 🔄 **Infinite Scrolling**: Dynamically fetch jobs as the user scrolls
+- 📝 **Job Details Screen**: Displays in-depth job information when clicked
+- ⭐ **Bookmarking Jobs**: Save jobs for later offline viewing
+- 📞 **Employer Contact**: Call or message employers directly from the app
+- 🔍 **Search Functionality**: Easily find jobs within the listing
+- ⏳ **Lazy Loading**: Optimize performance by loading data only when needed
+- ⚠️ **Error & Loading States**: Displays proper UI for loading, errors, and empty states
+- 📱 **EAS Deployment**: Deployed using Expo Application Services (EAS)
+
+## 🚀 Setup Instructions
+
+1. 📥 **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd lokal-jobs-app
+   ```
+2. 📦 **Install dependencies:**
    ```bash
    npm install
    ```
-
-2. Start the app
-
+3. 🏗️ **Start the development server:**
    ```bash
-    npx expo start
+   npx expo start
    ```
+4. 📱 **Run on an emulator or physical device:**
+   - 📲 **For Android:** Press **'a'** or use Expo Go
+   - 🍏 **For iOS:** Press **'i'** (requires macOS with Xcode installed)
 
-In the output, you'll find options to open the app in a
+This project successfully implements the required features and enhances the user experience with additional optimizations. 🚀
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
